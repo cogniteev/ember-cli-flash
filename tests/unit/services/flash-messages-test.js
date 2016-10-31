@@ -198,3 +198,14 @@ test('it supports chaining', function(assert) {
   assert.equal(get(service, 'queue.firstObject.message'), 'foo', 'should support chaining');
   assert.equal(get(service, 'queue.lastObject.message'), 'bar', 'should support chaining');
 });
+
+test('it returns flash object when fetched through `getFlashObject`', function(assert) {
+  const { flashMessageDefaults } = config;
+  const flash = service
+    .clearMessages()
+    .add({ message: 'foo' })
+    .getFlashObject();
+
+  assert.equal(get(flash, 'message'), 'foo', 'it returns flash object with correct message');
+  assert.equal(get(flash, 'timeout'), flashMessageDefaults.timeout, 'it returns an object with defaults');
+});

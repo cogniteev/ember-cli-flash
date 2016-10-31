@@ -68,6 +68,13 @@ export default Service.extend({
     return this;
   },
 
+  getFlashObject() {
+    const errorText = 'A flass message must be added before it can be returned';
+    assert(errorText, get(this, 'queue').length);
+
+    return get(this, 'queue.lastObject');
+  },
+
   _newFlashMessage(options = {}) {
     assert('The flash message cannot be empty.', options.message);
 
