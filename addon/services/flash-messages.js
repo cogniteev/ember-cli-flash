@@ -50,6 +50,20 @@ export default Service.extend({
     return this;
   },
 
+  peekFirst() {
+    const queue = get(this, 'queue');
+    if (queue.length > 0) {
+      return get(this, 'queue').objectAt(0);
+    }
+  },
+
+  peekLast() {
+    const queue = get(this, 'queue');
+    if (queue.length > 0) {
+      return queue.objectAt(queue.length - 1);
+    }
+  },
+
   clearMessages() {
     const flashes = get(this, 'queue');
 
